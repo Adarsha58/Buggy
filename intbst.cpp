@@ -253,8 +253,23 @@ bool IntBST::remove(int value){
 			}
 		}
 	}
+        //one of the student student had a buggy code something like this
+        int tmp = p->info;
+        p->info = getPredecessor(value);
+        getPredecessorNode(value)->info = tmp;
+        remove(tmp);
+        // so the student had the right idea that for the node with two children, you swap the predecessor and node’s value and delete the predecessor spot correctly with recursion. 
+        // but the problem was the following: suppose you had root node 64 with children and it’s predecessor 32. So you basically swap 32 and 64 values and call remove(64);—predecessor spot.
+        // when this happens, getNodeFor(64) is called in the next recursive function call. The way how this function getNodeFor works is that it assumes Bst property is always preserved such as smaller values are to the left and vice versa
+        // however when we swapped 64 and 32 for some time for remove function, after the swap 64 is to the left of 32. So getNodeFor(64) is gonna return null even though it’s there.
+        // So I proposed some solutions to the student(I don’t know if it worked, this is not the exact code, so I can’t try):
+        // implement getNodeFor(value) in such a way that it checks every node using traversal  not depending upon Bst properties 
+        // remove and fix the predecessor spot and then swap the value to the node to get removed as below. 
+
+/*—-Correct Version
 	int replacement = getPredecessor(value);
 	remove(replacement);
 	p->info = replacement;
+*/
 	return true;
 }
