@@ -263,7 +263,7 @@ bool IntBST::remove(int value){
         // when this happens, getNodeFor(64) is called in the next recursive function call. The way how this function getNodeFor works is that it assumes Bst property is always preserved such as smaller values are to the left and vice versa
         // however when we swapped 64 and 32 for some time for remove function, after the swap 64 is to the left of 32. So getNodeFor(64) is gonna return null even though it’s there.
         // So I proposed some solutions to the student(I don’t know if it worked, this is not the exact code, so I can’t try):
-        // implement getNodeFor(value) in such a way that it checks every node using traversal  not depending upon Bst properties 
+        // implement getNodeFor(value) in such a way that it checks every node using traversal  not depending upon Bst properties. Or
         // remove and fix the predecessor spot and then swap the value to the node to get removed as below. 
 
 /*—-Correct Version
